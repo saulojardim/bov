@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOV • Dashboard</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bov-dark:#1f4f3a;
+      --bov-dark-2:#174031;
+      --bov-bg:#f4f6f8;
+      --bov-border:#e7eaee;
+    }
+    body{ background: var(--bov-bg); }
+    .app-shell{
+      background:#fff;
+      border:1px solid var(--bov-border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      max-width: 1100px;
+      margin: 24px auto;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      background: linear-gradient(180deg, var(--bov-dark), var(--bov-dark-2));
+      color:#fff;
+      min-height: 640px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      padding:18px 18px 10px;
+    }
+    .brand-badge{
+      width:34px; height:34px;
+      border-radius:10px;
+      background: rgba(255,255,255,.12);
+      display:grid; place-items:center;
+    }
+    .nav-pill{
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      display:flex; align-items:center; gap:10px;
+      margin: 6px 12px;
+    }
+    .nav-pill:hover{ background: rgba(255,255,255,.10); color:#fff; }
+    .nav-pill.active{
+      background: rgba(255,255,255,.16);
+      color:#fff;
+    }
+    .nav-pill i{ font-size: 1.05rem; }
+
+    /* Topbar */
+    .topbar{
+      padding: 14px 18px;
+      border-bottom:1px solid var(--bov-border);
+      background:#fff;
+    }
+
+    /* Cards / UI */
+    .chip{
+      font-size:.78rem;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--bov-border);
+      background:#fff;
+      color:#556;
+      white-space:nowrap;
+    }
+    .price-pill{
+      background: var(--bov-dark);
+      color:#fff;
+      border-radius:10px;
+      padding:6px 10px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .scorebar{
+      height:8px; border-radius:999px; background:#eef2f5; overflow:hidden;
+    }
+    .scorebar > span{ display:block; height:100%; border-radius:999px; width:72%; background:#2f7d57; }
+    .soft-card{
+      border:1px solid var(--bov-border);
+      border-radius:14px;
+      background:#fff;
+    }
+    .muted{ color:#6c757d; }
+
+    /* Make it look like the screenshot spacing */
+    .content-pad{ padding: 16px 18px 18px; }
+
+    @media (max-width: 991.98px){
+      .app-shell{ border-radius: 14px; margin: 12px; }
+      .sidebar{ min-height:auto; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app-shell">
+  <div class="row g-0">
+
+    <!-- Sidebar (desktop) -->
+    <aside class="col-lg-3 d-none d-lg-block sidebar">
+      <div class="brand">
+        <div class="brand-badge">
+          <!-- troque pelo seu SVG/logo -->
+          <i class="bi bi-lightning-charge text-white"></i>
+        </div>
+        <div>
+          <div class="fw-bold fs-5">BOV</div>
+          <div class="small opacity-75">Painel</div>
+        </div>
+      </div>
+
+      <nav class="mt-2 pb-3">
+        <a class="nav-pill active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
+        <a class="nav-pill" href="#"><i class="bi bi-bag"></i> Compras</a>
+        <a class="nav-pill" href="#"><i class="bi bi-cash-coin"></i> Vendas</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="col-lg-9">
+
+      <!-- Topbar -->
+      <div class="topbar d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <!-- Mobile: open sidebar -->
+          <button class="btn btn-outline-secondary d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="fw-semibold">Anúncios</div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-light border"><i class="bi bi-arrow-repeat"></i></button>
+          <button class="btn btn-light border"><i class="bi bi-person"></i></button>
+        </div>
+      </div>
+
+      <div class="content-pad">
+
+        <!-- Filters -->
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+          <div class="input-group" style="max-width: 220px;">
+            <span class="input-group-text bg-white"><i class="bi bi-geo"></i></span>
+            <select class="form-select">
+              <option selected>Estado</option>
+              <option>RJ</option>
+              <option>MG</option>
+              <option>SP</option>
+            </select>
+          </div>
+
+          <div class="input-group" style="max-width: 240px;">
+            <span class="input-group-text bg-white"><i class="bi bi-tags"></i></span>
+            <select class="form-select">
+              <option selected>Categoria</option>
+              <option>Neloré</option>
+              <option>Brangus</option>
+              <option>Hereford</option>
+            </select>
+          </div>
+
+          <div class="input-group" style="max-width: 200px;">
+            <span class="input-group-text bg-white"><i class="bi bi-speedometer2"></i></span>
+            <select class="form-select">
+              <option selected>Peso</option>
+              <option>8–10@</option>
+              <option>14–16@</option>
+              <option>18–20@</option>
+            </select>
+          </div>
+
+          <div class="input-group flex-grow-1" style="min-width: 220px;">
+            <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+            <input class="form-control" placeholder="Buscar..." />
+          </div>
+
+          <button class="btn text-white" style="background: var(--bov-dark);">
+            Filtrar
+          </button>
+        </div>
+
+        <div class="row g-3">
+          <!-- List -->
+          <div class="col-lg-8">
+
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="fw-semibold">Anúncios</div>
+              <span class="small muted">3 resultados</span>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="soft-card p-3 mb-3">
+              <div class="d-flex gap-3">
+                <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=220&q=60"
+                     class="rounded-3 border" style="width:92px; height:70px; object-fit:cover;" alt="">
+                <div class="flex-grow-1">
+                  <div class="d-flex align-items-start justify-content-between gap-2">
+                    <div>
+                      <div class="fw-semibold">Nelore - Machos</div>
+                      <div class="small muted">30 cabeças • Campos dos Goytacazes / RJ</div>
+                    </div>
+                    <div class="price-pill">R$ 315,00/@</div>
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 mt-2 align-items-center">
+                    <span class="chip">14,5 - 16,0 @</span>
+                    <span class="chip">Campos dos Goytacazes / RJ</span>
+
+                    <div class="ms-auto d-flex align-items-center gap-2">
+                      <div class="small muted">Comprador com Score alto</div>
+                      <div class="scorebar" style="width:120px;"><span style="width:72%"></span></div>
+                      <div class="small fw-semibold">720</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="soft-card p-3 mb-3">
+              <div class="d-flex gap-3">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=220&q=60"
+                     class="rounded-3 border" style="width:92px; height:70px; object-fit:cover;" alt="">
+                <div class="flex-grow-1">
+                  <div class="d-flex align-items-start justify-content-between gap-2">
+                    <div>
+                      <div class="fw-semibold">Brangus - Bezerros</div>
+                      <div class="small muted">20 cabeças • São Francisco do Itabapoana / RJ</div>
+                    </div>
+                    <div class="price-pill">R$ 330,00/@</div>
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 mt-2 align-items-center">
+                    <span class="chip">9,0 - 9,5 @</span>
+                    <span class="chip">São Francisco do Itabapoana / RJ</span>
+
+                    <div class="ms-auto d-flex align-items-center gap-2">
+                      <div class="small muted">Comprador com Score alto</div>
+                      <div class="scorebar" style="width:120px;"><span style="width:78%"></span></div>
+                      <div class="small fw-semibold">780</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="soft-card p-3">
+              <div class="d-flex gap-3">
+                <img src="https://images.unsplash.com/photo-1596733430284-f7437764b1a9?auto=format&fit=crop&w=220&q=60"
+                     class="rounded-3 border" style="width:92px; height:70px; object-fit:cover;" alt="">
+                <div class="flex-grow-1">
+                  <div class="d-flex align-items-start justify-content-between gap-2">
+                    <div>
+                      <div class="fw-semibold">Hereford - Macho</div>
+                      <div class="small muted">14 cabeças • Morro do Coco (Campos/RJ)</div>
+                    </div>
+                    <div class="price-pill">R$ 310,00/@</div>
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 mt-2 align-items-center">
+                    <span class="chip">18,0 - 20,0 @</span>
+                    <span class="chip">Morro do Coco (Campos/RJ)</span>
+
+                    <div class="ms-auto d-flex align-items-center gap-2">
+                      <div class="small muted">Comprador com Score alto</div>
+                      <div class="scorebar" style="width:120px;"><span style="width:86%"></span></div>
+                      <div class="small fw-semibold">860</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Side panel -->
+          <div class="col-lg-4">
+            <div class="soft-card p-3">
+              <div class="fw-semibold mb-2">Status dos Negócios</div>
+
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <div class="fs-4 fw-bold">R$ 176.250,00</div>
+              </div>
+
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-check-circle-fill" style="color:#2f7d57"></i>
+                <div class="small">Confiável</div>
+              </div>
+
+              <div class="mb-3">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-shield-check" style="color:#2f7d57"></i>
+                  <div class="fw-semibold">Confiável</div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <div style="width: 220px;">
+                  <canvas id="donut"></canvas>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-3 small">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="d-inline-block rounded-circle" style="width:10px;height:10px;background:#2f7d57"></span>
+                  <span>À vista</span>
+                  <span class="fw-semibold">60%</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="d-inline-block rounded-circle" style="width:10px;height:10px;background:#97c3ad"></span>
+                  <span>A prazo</span>
+                  <span class="fw-semibold">40%</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- row -->
+      </div><!-- pad -->
+
+    </main>
+  </div><!-- row -->
+</div><!-- shell -->
+
+<!-- Mobile sidebar (offcanvas) -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">BOV</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <div class="sidebar p-2" style="min-height:auto;">
+      <a class="nav-pill active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
+      <a class="nav-pill" href="#"><i class="bi bi-bag"></i> Compras</a>
+      <a class="nav-pill" href="#"><i class="bi bi-cash-coin"></i> Vendas</a>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+  // Donut chart
+  const ctx = document.getElementById('donut');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['À vista', 'A prazo'],
+      datasets: [{
+        data: [60, 40],
+        backgroundColor: ['#2f7d57', '#97c3ad'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
