@@ -265,9 +265,43 @@
     .offcanvas .btn-close{ filter: invert(1); }
 
     .bov-logo{
-  height: 38px;
-  width: auto;
+    height: 38px;
+    width: auto;
+    }
+
+    .pagination .page-link{
+  color: #1F4D3A; /* mesma cor da sidebar */
+  border-radius: 10px;
+  margin: 0 4px;
+  border: 1px solid #e9ecef;
+  font-weight: 600;
 }
+
+.pagination .page-item.active .page-link{
+  background-color: #1F4D3A;
+  border-color: #1F4D3A;
+  color: #fff;
+}
+
+.pagination .page-link:hover{
+  background-color: rgba(31, 77, 58, 0.08);
+  color: #1F4D3A;
+  border-color: #1F4D3A;
+}
+
+.welcome-text{
+  line-height: 1.1;
+}
+
+.welcome-text .small{
+  font-size: 12px;
+}
+
+.welcome-text .fw-bold{
+  font-size: 14px;
+}
+
+
   </style>
 </head>
 
@@ -276,24 +310,57 @@
 
     <!-- Sidebar (desktop) -->
     <aside class="bov-sidebar">
-      <div class="bov-brand">
-        <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
-      </div>
+      <div class="bov-brand d-flex align-items-center justify-content-between">
+  
+  <div class="d-flex align-items-center gap-3">
+    <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
+  </div>
 
-      <nav class="nav flex-column bov-nav gap-1">
-        <a class="nav-link active" href="#">
-          <i class="bi bi-grid"></i>
-          Anúncios
-        </a>
-        <a class="nav-link" href="#">
-          <i class="bi bi-cart3"></i>
-          Compras
-        </a>
-        <a class="nav-link" href="#">
-          <i class="bi bi-briefcase"></i>
-          Vendas
-        </a>
-      </nav>
+  <div class="welcome-text text-end">
+    <div class="small text-white-50">Olá, Saulo.</div>
+    <div class="fw-bold text-white">Bem-vindo!</div>
+  </div>
+
+</div>
+
+<nav class="nav flex-column bov-nav gap-1">
+
+  <a class="nav-link active" href="#">
+    <i class="bi bi-grid"></i>
+    Anúncios
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-megaphone"></i>
+    Vender
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-arrow-left-right"></i>
+    Negócios em Aberto
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-clock-history"></i>
+    Histórico
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-graph-up-arrow"></i>
+    Score
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-person-circle"></i>
+    Perfil
+  </a>
+
+  <a class="nav-link" href="#">
+    <i class="bi bi-box-arrow-right"></i>
+    Sair
+  </a>
+
+</nav>
 
       <div class="mt-auto pt-3" style="opacity:.9;">
         <small>© BOV</small>
@@ -334,12 +401,14 @@
         <div class="card-body">
           <form class="row g-3 align-items-end">
             <div class="col-12 col-md-4">
-              <label class="form-label" for="estado">Estado</label>
-              <select class="form-select" id="estado">
-                <option selected>RJ</option>
-                <option>ES</option>
-                <option>MG</option>
-                <option>SP</option>
+              <label class="form-label" for="municipio">Município</label>
+              <select class="form-select" id="municipio">
+                <option >Cambuci/RJ</option>
+                <option selected>Campos dos Goytacazes/RJ</option>
+                <option>Itaperuna/RJ</option>
+                <option>Bom Jesus do Itabapoana/RJ</option>
+                <option>São Fidélis/RJ</option>
+                <option>São Francisco do Itabapoana/RJ</option>
               </select>
             </div>
 
@@ -460,24 +529,158 @@
           </div>
         </article>
 
-      </section>
+ <!-- Item 4 -->
+        <article class="ad-item">
+          <img class="ad-thumb" src="https://placehold.co/320x220" alt="Foto do lote" />
 
+          <div>
+            <h3 class="ad-title">Nelore • Fêmea</h3>
+            <p class="ad-meta">10 cabeças • Santa Maria (Campos/RJ)</p>
+
+            <div>
+              <span class="chip">10,0 – 11,0 @</span>
+              <span class="chip">Santa Maria</span>
+            </div>
+
+            <div class="text-muted small mt-1">Vendedor com score médio</div>
+          </div>
+
+          <div class="ad-right">
+            <div class="price-badge">R$ 310,00/@</div>
+            <button class="btn-proposta" type="button">Enviar proposta</button>
+            <div class="rating">
+              <span>4.1</span>
+              <span class="stars" aria-label="Avaliação 4.1 de 5">★★★★</span>
+              <span>(107)</span>
+            </div>
+          </div>
+        </article>
+
+         <!-- Item 5 -->
+        <article class="ad-item">
+          <img class="ad-thumb" src="https://placehold.co/320x220" alt="Foto do lote" />
+
+          <div>
+            <h3 class="ad-title">Hereford • Macho</h3>
+            <p class="ad-meta">14 cabeças • Morro do Coco (Campos/RJ)</p>
+
+            <div>
+              <span class="chip">18,0 – 20,0 @</span>
+              <span class="chip">Morro do Coco</span>
+            </div>
+
+            <div class="text-muted small mt-1">Comprador com score alto</div>
+          </div>
+
+          <div class="ad-right">
+            <div class="price-badge">R$ 310,00/@</div>
+            <button class="btn-proposta" type="button">Enviar proposta</button>
+            <div class="rating">
+              <span>4.8</span>
+              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
+              <span>(317)</span>
+            </div>
+          </div>
+        </article>
+
+         <!-- Item 6 -->
+        <article class="ad-item">
+          <img class="ad-thumb" src="https://placehold.co/320x220" alt="Foto do lote" />
+
+          <div>
+            <h3 class="ad-title">Hereford • Macho</h3>
+            <p class="ad-meta">14 cabeças • Morro do Coco (Campos/RJ)</p>
+
+            <div>
+              <span class="chip">18,0 – 20,0 @</span>
+              <span class="chip">Morro do Coco</span>
+            </div>
+
+            <div class="text-muted small mt-1">Comprador com score alto</div>
+          </div>
+
+          <div class="ad-right">
+            <div class="price-badge">R$ 310,00/@</div>
+            <button class="btn-proposta" type="button">Enviar proposta</button>
+            <div class="rating">
+              <span>4.8</span>
+              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
+              <span>(317)</span>
+            </div>
+          </div>
+        </article>
+
+
+
+
+
+
+
+        
+      </section>
+<nav aria-label="Paginação de anúncios" class="mt-4">
+  <ul class="pagination justify-content-center">
+
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">
+        <i class="bi bi-chevron-left"></i>
+      </a>
+    </li>
+
+    <li class="page-item active">
+      <a class="page-link" href="#">1</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="#">4</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="#">5</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="#">
+        <i class="bi bi-chevron-right"></i>
+      </a>
+    </li>
+
+  </ul>
+</nav>
     </main>
+    
   </div>
+
+  
 
   <!-- Offcanvas menu (mobile) -->
   <div class="offcanvas offcanvas-start bov-offcanvas" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
     <div class="offcanvas-header">
       <div class="d-flex align-items-center gap-2">
-         <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
+        <div class="logo-box" aria-hidden="true">
+          <i class="bi bi-droplet-half"></i>
+        </div>
+        <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
       </div>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column bov-nav gap-1">
         <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
-        <a class="nav-link" href="#"><i class="bi bi-cart3"></i> Compras</a>
-        <a class="nav-link" href="#"><i class="bi bi-briefcase"></i> Vendas</a>
+        <a class="nav-link" href="#"><i class="bi bi-megaphone"></i> Vender</a>
+        <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i> Negócios em Aberto</a>
+        <a class="nav-link" href="#"><i class="bi bi-clock-history"></i> Histórico</a>
+        <a class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i> Score</a>
+        <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Perfil</a>
+        <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a>
       </nav>
     </div>
   </div>
