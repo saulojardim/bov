@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOV • Detalhe do anúncio</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Seu CSS (depois do Bootstrap) -->
+  <link rel="stylesheet" href="main.css">
+
+  <!-- CSS extra do layout do painel + detalhe -->
+  <style>
+    :root{
+      --bov-green: #1F4D3A;
+      --bov-green-2: #1b4434;
+      --bov-bg: #f6f7f9;
+      --bov-border: #e9ecef;
+      --muted: #64748b;
+      --title: #0f172a;
+    }
+
+    body{ background: var(--bov-bg); }
+
+    /* Shell */
+    .bov-shell{ min-height: 100vh; display: flex; }
+
+    /* Sidebar */
+    .bov-sidebar{
+      width: 280px;
+      background: var(--bov-green);
+      color: #fff;
+      position: sticky; top: 0;
+      height: 100vh;
+      padding: 22px 16px;
+      display: none;
+    }
+    @media (min-width: 992px){
+      .bov-sidebar{ display: flex; flex-direction: column; }
+    }
+
+    .bov-brand{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 10px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      margin-bottom: 16px;
+    }
+    .bov-logo{ height: 38px; width: auto; display: block; }
+
+    .welcome-text{ line-height: 1.1; text-align: right; }
+    .welcome-text .small{ font-size: 12px; }
+    .welcome-text .fw-bold{ font-size: 14px; }
+
+    .bov-nav .nav-link{
+      color: rgba(255,255,255,.92);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+    .bov-nav .nav-link:hover{ background: rgba(255,255,255,.10); color: #fff; }
+    .bov-nav .nav-link.active{
+      background: rgba(255,255,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+    }
+    .bov-nav .nav-link i{ font-size: 18px; }
+
+    /* Main */
+    .bov-main{ flex: 1; padding: 18px 14px 40px; }
+    @media (min-width: 992px){
+      .bov-main{ padding: 24px 28px 60px; }
+    }
+
+    /* Topbar */
+    .bov-topbar{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .bov-page-title{ margin:0; font-weight: 900; color: var(--title); font-size: 26px; }
+    @media (min-width: 992px){ .bov-page-title{ font-size: 30px; } }
+
+    .bov-page-sub{ margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+
+    .icon-btn{
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--bov-border);
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+    }
+    .icon-btn:hover{ background: #f8fafc; }
+
+    /* Cards */
+    .bov-card{
+      border: 1px solid var(--bov-border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(15,23,42,.02);
+    }
+    .bov-card .card-body{ padding: 16px; }
+    @media (min-width: 992px){ .bov-card .card-body{ padding: 18px; } }
+
+    /* Buttons */
+    .btn-bov{
+      background: var(--bov-green);
+      border-color: var(--bov-green);
+      color: #fff;
+      font-weight: 800;
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    .btn-bov:hover{ background: var(--bov-green-2); border-color: var(--bov-green-2); color:#fff; }
+
+    .btn-outline-bov{
+      border: 1px solid var(--bov-green);
+      color: var(--bov-green);
+      font-weight: 800;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: #fff;
+    }
+    .btn-outline-bov:hover{ background: #f0f7f4; color: var(--bov-green); }
+
+    /* Chips */
+    .chip{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    /* Gallery */
+    .gallery{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 992px){
+      .gallery{
+        grid-template-columns: 78px 1fr;
+        align-items: start;
+      }
+    }
+
+    .thumbs{
+      display: flex;
+      gap: 10px;
+      overflow: auto;
+      padding-bottom: 4px;
+    }
+    @media (min-width: 992px){
+      .thumbs{
+        flex-direction: column;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+    }
+
+    .thumb-btn{
+      border: 1px solid var(--bov-border);
+      border-radius: 12px;
+      padding: 0;
+      background: #fff;
+      width: 74px;
+      height: 56px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      cursor: pointer;
+    }
+    .thumb-btn img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb-btn.active{
+      border-color: var(--bov-green);
+      box-shadow: 0 0 0 3px rgba(31,77,58,.12);
+    }
+
+    .main-photo{
+      border: 1px solid var(--bov-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f1f5f9;
+      aspect-ratio: 16 / 10;
+      width: 100%;
+    }
+    .main-photo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Rating */
+    .rating{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .rating-value{ font-weight: 900; color: var(--title); }
+    .stars{ color: #f4b400; font-size: 14px; }
+    .stars i{ margin-right: 2px; }
+
+    /* Offcanvas (mobile) */
+    .offcanvas.bov-offcanvas{ background: var(--bov-green); color: #fff; }
+    .offcanvas .nav-link{ color: rgba(255,255,255,.92); }
+    .offcanvas .nav-link.active{ background: rgba(255,255,255,.12); }
+    .offcanvas .btn-close{ filter: invert(1); }
+
+    .price-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap; /* <- essencial para mobile */
+}
+
+.price-left{
+  min-width: 220px; /* dá uma base no desktop */
+  flex: 1 1 240px;  /* permite quebrar */
+}
+
+.price-amount{
+  margin-top: 4px;
+  font-weight: 900;
+  color: var(--bov-green);
+  font-size: clamp(22px, 5vw, 28px); /* <- responsivo */
+  line-height: 1.05;
+}
+
+
+
+/* Seller layout igual ao seu print */
+.seller2{
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.seller2-avatar{
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  background: #f1f5f9;
+  border: 1px solid var(--bov-border);
+  display: grid;
+  place-items: center;
+  color: #334155;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.seller2-title{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  color: var(--title);
+  line-height: 1.1;
+}
+
+.seller2-title i{
+  color: var(--bov-green);
+  font-size: 16px;
+}
+
+/* rating abaixo do título, sempre alinhado à esquerda */
+.seller2-rating{
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.seller2-rating .rating-value{
+  font-weight: 900;
+  color: var(--title);
+}
+
+.stars{
+  color: #f59e0b;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.stars i{ margin-right: 2px; }
+
+/* tags uma embaixo da outra */
+.seller2-tags{
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  max-width: 220px; /* mantém compacto como no print */
+}
+
+.tag2{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--bov-border);
+  background: #fff;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tag2 i{ color: #64748b; }
+
+.tag2 strong{
+  color: var(--title);
+  font-weight: 900;
+}
+
+/* Mobile: deixa tags ocuparem a largura disponível se precisar */
+@media (max-width: 420px){
+  .seller2-tags{ max-width: 100%; }
+  .seller2-rating{ white-space: normal; flex-wrap: wrap; gap: 8px; }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="bov-shell">
+
+    <!-- Sidebar (desktop) -->
+    <aside class="bov-sidebar">
+      <div class="bov-brand">
+        <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
+        <div class="welcome-text">
+          <div class="small text-white-50">Olá, Saulo.</div>
+          <div class="fw-bold text-white">Bem-vindo!</div>
+        </div>
+      </div>
+
+      <nav class="nav flex-column bov-nav gap-1">
+        <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
+        <a class="nav-link" href="#"><i class="bi bi-megaphone"></i> Vender</a>
+        <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i> Negócios em Aberto</a>
+        <a class="nav-link" href="#"><i class="bi bi-clock-history"></i> Histórico</a>
+        <a class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i> Score</a>
+        <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Perfil</a>
+        <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a>
+      </nav>
+
+      <div class="mt-auto pt-3" style="opacity:.9;">
+        <small>© BOV</small>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="bov-main">
+
+      <!-- Topbar -->
+      <div class="bov-topbar">
+        <div class="d-flex align-items-start gap-2">
+          <button class="btn btn-bov d-lg-none" type="button"
+                  data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+                  aria-controls="mobileMenu">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div>
+            <h1 class="bov-page-title">Nelore • Machos — Campos dos Goytacazes</h1>
+            <p class="bov-page-sub">Detalhes do lote, fotos e informações do vendedor.</p>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <a class="icon-btn" href="anuncios.html" aria-label="Voltar">
+            <i class="bi bi-arrow-left"></i>
+          </a>
+          <button class="icon-btn" type="button" aria-label="Atualizar">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="row g-3">
+        <!-- Coluna esquerda: galeria + detalhes -->
+        <div class="col-12 col-lg-8">
+
+          <!-- Galeria -->
+          <section class="bov-card mb-3">
+            <div class="card-body">
+              <div class="gallery">
+                <div class="thumbs" id="thumbs">
+                  <button class="thumb-btn active" type="button" data-img="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1600&q=80" aria-label="Foto 1">
+                    <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=300&q=80" alt="Foto do gado 1">
+                  </button>
+
+                  <button class="thumb-btn" type="button" data-img="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=1600&q=80" aria-label="Foto 2">
+                    <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=300&q=80" alt="Foto do gado 2">
+                  </button>
+
+                  <button class="thumb-btn" type="button" data-img="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=1600&q=80" aria-label="Foto 3">
+                    <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=300&q=80" alt="Foto do gado 3">
+                  </button>
+                </div>
+
+                <div class="main-photo">
+                  <img id="mainImage" src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1600&q=80" alt="Foto principal do lote">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Informações do lote -->
+          <section class="bov-card">
+            <div class="card-body">
+              <div class="d-flex flex-wrap gap-2 mb-2">
+                <span class="chip"><i class="bi bi-geo-alt"></i> Campos dos Goytacazes/RJ</span>
+                <span class="chip"><i class="bi bi-boxes"></i> 30 cabeças</span>
+                <span class="chip"><i class="bi bi-speedometer2"></i> 14,5 – 16,0 @</span>
+                <span class="chip"><i class="bi bi-tags"></i> Nelore • Machos</span>
+              </div>
+
+              <h2 class="h5 fw-bold mb-2" style="color: var(--title);">Descrição do rebanho</h2>
+              <p class="mb-3" style="color: var(--muted);">
+                Lote uniforme, bom acabamento, animais sadios e bem manejados. Ideal para recria/engorda.
+                (Aqui você coloca a descrição real: idade média, sanidade, vermifugação, vacinação, origem, etc.)
+              </p>
+
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <div class="p-3 rounded-3" style="border:1px solid var(--bov-border); background:#fff;">
+                    <div class="small fw-bold text-uppercase" style="color: var(--muted); letter-spacing:.5px;">Condições</div>
+                    <div class="mt-2 d-grid gap-1">
+                      <div class="d-flex justify-content-between"><span style="color:var(--muted)">Retirada</span><strong>7 dias</strong></div>
+                      <div class="d-flex justify-content-between"><span style="color:var(--muted)">Frete</span><strong>À combinar</strong></div>
+                      <div class="d-flex justify-content-between"><span style="color:var(--muted)">Pagamento</span><strong>À vista / prazo</strong></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <div class="p-3 rounded-3" style="border:1px solid var(--bov-border); background:#fff;">
+                    <div class="small fw-bold text-uppercase" style="color: var(--muted); letter-spacing:.5px;">Localização</div>
+                    <div class="mt-2" style="color: var(--muted);">
+                      <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-geo-alt"></i> Morro do Coco — Campos/RJ
+                      </div>
+                      <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-map"></i> Raio de entrega: 200 km
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <!-- Coluna direita: preço + vendedor + ações -->
+        <div class="col-12 col-lg-4">
+
+          <!-- Box principal -->
+          <section class="bov-card mb-3">
+            <div class="card-body">
+
+                <div class="price-head">
+  <div class="price-left">
+    <div class="small fw-bold text-uppercase" style="color: var(--muted); letter-spacing:.5px;">
+      Preço
+    </div>
+
+    <div class="price-amount">R$ 315,00/@</div>
+
+    <div class="small" style="color: var(--muted);">
+      Valor estimado varia por negociação.
+    </div>
+  </div>
+</div>
+
+              <hr class="my-3">
+
+              <div class="d-grid gap-2">
+                <button class="btn btn-bov" type="button" data-bs-toggle="modal" data-bs-target="#modalProposta">
+                  <i class="bi bi-send"></i> Enviar proposta
+                </button>
+                <button class="btn btn-outline-bov" type="button">
+                  <i class="bi bi-heart"></i> Salvar anúncio
+                </button>
+              </div>
+
+              <div class="mt-3 small" style="color: var(--muted);">
+                <i class="bi bi-shield-check"></i> Plataforma protege sua negociação e histórico.
+              </div>
+            </div>
+          </section>
+
+          <!-- Vendedor -->
+          <section class="bov-card">
+            <div class="card-body">
+              
+                <div class="seller2">
+  <div class="seller2-avatar" aria-hidden="true">
+    <i class="bi bi-person"></i>
+  </div>
+
+  <div class="seller2-body">
+    <div class="seller2-title">
+      <i class="bi bi-shield-check"></i>
+      <span>Vendedor verificado</span>
+    </div>
+
+    <div class="seller2-rating" aria-label="Avaliação do vendedor 4.8 de 5">
+      <span class="rating-value">4.8</span>
+      <span class="stars">
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star"></i>
+      </span>
+      <span class="rating-count">(317)</span>
+    </div>
+
+    <div class="seller2-tags">
+      <span class="tag2">
+        <i class="bi bi-graph-up-arrow"></i> Score <strong>alto</strong>
+      </span>
+      <span class="tag2">
+        <i class="bi bi-lightning-charge"></i> Responde <strong>rápido</strong>
+      </span>
+    </div>
+  </div>
+</div>
+
+              <hr class="my-3">
+
+              <div class="d-grid gap-2">
+                <button class="btn btn-outline-bov" type="button">
+                  <i class="bi bi-chat-dots"></i> Conversar
+                </button>
+                <button class="btn btn-outline-bov" type="button">
+                  <i class="bi bi-telephone"></i> Solicitar contato
+                </button>
+              </div>
+
+              <div class="mt-3 small" style="color: var(--muted);">
+                Dica: negocie sempre dentro do BOV para manter registro e segurança.
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Offcanvas menu (mobile) -->
+  <div class="offcanvas offcanvas-start bov-offcanvas" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <div class="d-flex align-items-center gap-3">
+        <img src="assets/images/logo/white-logo.svg" alt="BOV" class="bov-logo">
+        <div class="welcome-text">
+          <div class="small text-white-50">Olá, Saulo.</div>
+          <div class="fw-bold text-white">Bem-vindo!</div>
+        </div>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="nav flex-column bov-nav gap-1">
+        <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
+        <a class="nav-link" href="#"><i class="bi bi-megaphone"></i> Vender</a>
+        <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i> Negócios em Aberto</a>
+        <a class="nav-link" href="#"><i class="bi bi-clock-history"></i> Histórico</a>
+        <a class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i> Score</a>
+        <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Perfil</a>
+        <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Modal de proposta -->
+  <div class="modal fade" id="modalProposta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius:16px; border:1px solid var(--bov-border);">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">Enviar proposta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="color: var(--muted); font-size: 12px;">Sua proposta (R$/@)</label>
+            <input class="form-control" placeholder="Ex: 312,00" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="color: var(--muted); font-size: 12px;">Mensagem (opcional)</label>
+            <textarea class="form-control" rows="3" placeholder="Condições, prazo, frete..."></textarea>
+          </div>
+          <div class="small" style="color: var(--muted);">
+            Ao enviar, o vendedor recebe sua proposta no chat do BOV.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-bov" type="button" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-bov" type="button"><i class="bi bi-send"></i> Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS simples da galeria -->
+  <script>
+    (function(){
+      const mainImage = document.getElementById('mainImage');
+      const thumbs = document.querySelectorAll('#thumbs .thumb-btn');
+      thumbs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          thumbs.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const img = btn.getAttribute('data-img');
+          if (img) mainImage.src = img;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
