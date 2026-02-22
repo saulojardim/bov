@@ -301,7 +301,23 @@
   font-size: 14px;
 }
 
+.stars{
+  color: #f4b400; /* dourado elegante */
+  font-size: 14px;
+}
 
+.rating{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.rating-value{
+  font-weight: 700;
+  color: #0f172a;
+}
   </style>
 </head>
 
@@ -390,9 +406,6 @@
           <button class="icon-btn" type="button" aria-label="Atualizar">
             <i class="bi bi-arrow-clockwise"></i>
           </button>
-          <button class="icon-btn" type="button" aria-label="Conta">
-            <i class="bi bi-person"></i>
-          </button>
         </div>
       </div>
 
@@ -439,7 +452,7 @@
             </div>
 
             <div class="col-12 col-md-4 d-grid">
-              <button class="btn btn-bov" type="button">Filtrar</button>
+              <button class="btn btn-bov" type="button">Pesquisar</button>
             </div>
           </form>
         </div>
@@ -461,17 +474,26 @@
               <span class="chip">Campos dos Goytacazes/RJ</span>
             </div>
 
-            <div class="text-muted small mt-1">Comprador com score alto</div>
+            <div class="text-muted small mt-1">Vendedor com score alto</div>
           </div>
 
           <div class="ad-right">
             <div class="price-badge">R$ 315,00/@</div>
-            <button class="btn-proposta" type="button">Enviar proposta</button>
-            <div class="rating">
-              <span>4.8</span>
-              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
-              <span>(317)</span>
-            </div>
+            <button class="btn-proposta" type="button">Enviar proposta</button>         
+                <div class="rating">
+                <span class="rating-value">4.8</span>
+
+                <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                </div>
+
+                <span class="rating-count">(317)</span>
+                </div>
+
           </div>
         </article>
 
@@ -488,16 +510,24 @@
               <span class="chip">São Francisco do Itabapoana/RJ</span>
             </div>
 
-            <div class="text-muted small mt-1">Comprador com score alto</div>
+            <div class="text-muted small mt-1">Vendedor com score alto</div>
           </div>
 
           <div class="ad-right">
             <div class="price-badge">R$ 330,00/@</div>
             <button class="btn-proposta" type="button">Enviar proposta</button>
             <div class="rating">
-              <span>4.8</span>
-              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
-              <span>(317)</span>
+            <span class="rating-value">4.8</span>
+
+            <div class="stars">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+
+            <span class="rating-count">(317)</span>
             </div>
           </div>
         </article>
@@ -515,17 +545,25 @@
               <span class="chip">Morro do Coco</span>
             </div>
 
-            <div class="text-muted small mt-1">Comprador com score alto</div>
+            <div class="text-muted small mt-1">Vendedor com score alto</div>
           </div>
 
           <div class="ad-right">
             <div class="price-badge">R$ 310,00/@</div>
             <button class="btn-proposta" type="button">Enviar proposta</button>
-            <div class="rating">
-              <span>4.8</span>
-              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
-              <span>(317)</span>
-            </div>
+                <div class="rating">
+                <span class="rating-value">4.8</span>
+
+                <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                </div>
+
+                <span class="rating-count">(317)</span>
+                </div>
           </div>
         </article>
 
@@ -548,11 +586,19 @@
           <div class="ad-right">
             <div class="price-badge">R$ 310,00/@</div>
             <button class="btn-proposta" type="button">Enviar proposta</button>
-            <div class="rating">
-              <span>4.1</span>
-              <span class="stars" aria-label="Avaliação 4.1 de 5">★★★★</span>
-              <span>(107)</span>
-            </div>
+                <div class="rating">
+                <span class="rating-value">4.1</span>
+
+                <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+
+                <span class="rating-count">(317)</span>
+                </div>
           </div>
         </article>
 
@@ -569,17 +615,25 @@
               <span class="chip">Morro do Coco</span>
             </div>
 
-            <div class="text-muted small mt-1">Comprador com score alto</div>
+            <div class="text-muted small mt-1">Vendedor com score alto</div>
           </div>
 
           <div class="ad-right">
             <div class="price-badge">R$ 310,00/@</div>
             <button class="btn-proposta" type="button">Enviar proposta</button>
-            <div class="rating">
-              <span>4.8</span>
-              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
-              <span>(317)</span>
-            </div>
+                <div class="rating">
+                <span class="rating-value">4.8</span>
+
+                <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                </div>
+
+                <span class="rating-count">(317)</span>
+                </div>
           </div>
         </article>
 
@@ -596,17 +650,25 @@
               <span class="chip">Morro do Coco</span>
             </div>
 
-            <div class="text-muted small mt-1">Comprador com score alto</div>
+            <div class="text-muted small mt-1">Vendedor com score alto</div>
           </div>
 
           <div class="ad-right">
             <div class="price-badge">R$ 310,00/@</div>
             <button class="btn-proposta" type="button">Enviar proposta</button>
-            <div class="rating">
-              <span>4.8</span>
-              <span class="stars" aria-label="Avaliação 4.8 de 5">★★★★★</span>
-              <span>(317)</span>
-            </div>
+                <div class="rating">
+                <span class="rating-value">4.8</span>
+
+                <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                </div>
+
+                <span class="rating-count">(317)</span>
+                </div>
           </div>
         </article>
 
@@ -669,7 +731,6 @@
       </div>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
     </div>
-
     <div class="offcanvas-body">
       <nav class="nav flex-column bov-nav gap-1">
         <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Anúncios</a>
